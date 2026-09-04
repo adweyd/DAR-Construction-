@@ -8,75 +8,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --glass-bg: rgba(22, 26, 36, 0.55);
-    --glass-card: rgba(255, 255, 255, 0.08);
-    --glass-card-hover: rgba(255, 255, 255, 0.15);
-    --glass-border: rgba(255, 255, 255, 0.18);
-    --glass-border-light: rgba(255, 255, 255, 0.3);
-    --primary-red: #ff3b30;
-    --primary-red-glow: rgba(255, 59, 48, 0.4);
-    --text-main: #ffffff;
-    --text-muted: #cbd5e1;
-    --accent-gold: #f59e0b;
-  }
+/* Ensure fixed background elements never block clicks */
+.bg-slideshow,
+.bg-overlay {
+  pointer-events: none;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+/* Use overflow-x: clip instead of hidden to prevent breaking anchor navigation */
+body {
+  background-color: #0b0f17;
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: clip; 
+}
 
-  body {
-    background-color: #0b0f17;
-    color: var(--text-main);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* Fullscreen Slideshow Background */
-  .bg-slideshow {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -2;
-  }
-  .bg-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    animation: slideFade 30s infinite ease-in-out;
-    filter: brightness(0.45) contrast(1.1);
-    transform: scale(1.05);
-  }
-  .bg-slide:nth-child(1) { background-image: url('3d36774a-c0c7-456c-b7de-459ddebac772.jpg'); animation-delay: 0s; }
-  .bg-slide:nth-child(2) { background-image: url('14de96ca-7330-4500-857a-c47fde8ba199.jpg'); animation-delay: 5s; }
-  .bg-slide:nth-child(3) { background-image: url('97a1a86f-fd75-4b61-b6fa-c8e8cc738d87.jpg'); animation-delay: 10s; }
-  .bg-slide:nth-child(4) { background-image: url('b363362c-1ee3-4461-a946-d52f13cec673.jpg'); animation-delay: 15s; }
-  .bg-slide:nth-child(5) { background-image: url('c842d44e-4e8d-4a70-94b5-74dde1618b75.jpg'); animation-delay: 20s; }
-  .bg-slide:nth-child(6) { background-image: url('d8a1340b-9a5a-4a19-ba2b-a6fcd2d20ef1.jpg'); animation-delay: 25s; }
-
-  @keyframes slideFade {
-    0% { opacity: 0; transform: scale(1.05); }
-    5% { opacity: 1; }
-    20% { opacity: 1; }
-    25% { opacity: 0; transform: scale(1.0); }
-    100% { opacity: 0; }
-  }
-
-  .bg-overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 50% 20%, rgba(15, 23, 42, 0.4), rgba(11, 15, 23, 0.85));
-    backdrop-filter: blur(4px);
-    z-index: -1;
-  }
-
-  .wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+/* Offset sections so the fixed header doesn't cover section titles */
+section { 
+  padding: 80px 0; 
+  scroll-margin-top: 100px;
+}
 
   /* Glassmorphism Standard Card */
   .glass-panel {
